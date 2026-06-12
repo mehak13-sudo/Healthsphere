@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HealthSphere - Smart Healthcare Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#00d4ff;
+--secondary:#6c63ff;
+--success:#00ff9d;
+--danger:#ff5d73;
+--warning:#ffb84d;
+
+--bg:#08111f;
+--bg2:#101c2d;
+
+--glass:rgba(255,255,255,.08);
+--border:rgba(255,255,255,.15);
+
+--text:#ffffff;
+--muted:#aeb7c6;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:
+radial-gradient(circle at top left,#0f2946,#08111f 60%);
+color:white;
+overflow-x:hidden;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+.container{
+width:90%;
+max-width:1400px;
+margin:auto;
+}
+
+/* NAVBAR */
+
+header{
+position:sticky;
+top:0;
+z-index:1000;
+backdrop-filter:blur(20px);
+background:rgba(8,17,31,.75);
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 0;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+background:linear-gradient(45deg,var(--primary),var(--success));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+color:var(--muted);
+transition:.3s;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+.mobile-menu{
+display:none;
+font-size:28px;
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+min-height:90vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:80px 0;
+}
+
+.hero-content{
+max-width:900px;
+}
+
+.hero h1{
+font-size:4rem;
+font-weight:900;
+margin-bottom:20px;
+line-height:1.1;
+}
+
+.gradient{
+background:linear-gradient(
+45deg,
+var(--primary),
+var(--success)
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+color:var(--muted);
+font-size:1.2rem;
+margin-bottom:30px;
+}
+
+.search-box{
+display:flex;
+background:var(--glass);
+border:1px solid var(--border);
+backdrop-filter:blur(20px);
+border-radius:16px;
+overflow:hidden;
+max-width:700px;
+margin:auto;
+}
+
+.search-box input{
+flex:1;
+background:transparent;
+border:none;
+outline:none;
+padding:18px;
+color:white;
+}
+
+.search-box button{
+border:none;
+padding:18px 25px;
+background:linear-gradient(
+45deg,
+var(--primary),
+var(--secondary)
+);
+color:white;
+cursor:pointer;
+}
+
+.hero-buttons{
+margin-top:25px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:14px 25px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+transition:.3s;
+}
+
+.btn-primary{
+background:linear-gradient(
+45deg,
+var(--primary),
+var(--secondary)
+);
+color:white;
+}
+
+.btn-secondary{
+background:var(--glass);
+border:1px solid var(--border);
+color:white;
+}
+
+.btn:hover{
+transform:translateY(-4px);
+}
+
+/* SECTION */
+
+section{
+padding:80px 0;
+}
+
+.section-title{
+font-size:2.5rem;
+font-weight:800;
+text-align:center;
+margin-bottom:15px;
+}
+
+.section-subtitle{
+text-align:center;
+color:var(--muted);
+margin-bottom:50px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+/* GLASS CARD */
+
+.card{
+background:var(--glass);
+border:1px solid var(--border);
+backdrop-filter:blur(20px);
+border-radius:20px;
+padding:25px;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+.card h3{
+margin-bottom:15px;
+}
+
+.card input,
+.card select,
+.card textarea{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.05);
+color:white;
+margin-bottom:10px;
+outline:none;
+}
+
+.card button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+background:linear-gradient(
+45deg,
+var(--primary),
+var(--secondary)
+);
+color:white;
+}
+
+.status{
+margin-top:10px;
+font-weight:600;
+}
+
+.progress{
+height:12px;
+background:rgba(255,255,255,.1);
+border-radius:20px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:linear-gradient(
+45deg,
+var(--success),
+var(--primary)
+);
+transition:.4s;
+}
+
+/* DIRECTORY */
+
+.directory-card{
+text-align:center;
+}
+
+.directory-card h4{
+margin-bottom:10px;
+}
+
+/* FEATURES */
+
+.feature-icon{
+font-size:40px;
+margin-bottom:15px;
+}
+
+/* EMERGENCY */
+
+.emergency{
+border-left:5px solid var(--danger);
+}
+
+/* CHATBOT */
+
+.chat-placeholder{
+height:300px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+font-weight:700;
+}
+
+/* FOOTER */
+
+footer{
+background:#050b15;
+padding:60px 0 20px;
+}
+
+.footer-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.footer-col h3{
+margin-bottom:15px;
+}
+
+.footer-col p,
+.footer-col a{
+color:var(--muted);
+display:block;
+margin-bottom:8px;
+}
+
+.footer-bottom{
+margin-top:30px;
+padding-top:20px;
+border-top:1px solid rgba(255,255,255,.1);
+text-align:center;
+color:var(--muted);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:2.7rem;
+}
+
+.nav-links{
+display:none;
+}
+
+.mobile-menu{
+display:block;
+}
+
+.search-box{
+flex-direction:column;
+}
+
+.search-box button{
+width:100%;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<div class="container navbar">
+
+<div class="logo">HealthSphere</div>
+
+<div class="nav-links">
+<a href="#dashboard">Dashboard</a>
+<a href="#tools">Tools</a>
+<a href="#doctors">Doctors</a>
+<a href="#hospitals">Hospitals</a>
+<a href="#profile">Profile</a>
+</div>
+
+<div class="mobile-menu">☰</div>
+
+</div>
+</header>
+
+<section class="hero">
+
+<div class="container hero-content">
+
+<h1>
+Your Smart
+<span class="gradient">
+Healthcare Companion
+</span>
+</h1>
+
+<p>
+Track health metrics, manage medications,
+appointments and wellness in one secure dashboard.
+</p>
+
+<div class="search-box">
+<input
+type="text"
+placeholder="Search health resources..."
+>
+<button>Search</button>
+</div>
+
+<div class="hero-buttons">
+
+<button class="btn btn-primary">
+Get Started
+</button>
+
+<button class="btn btn-secondary">
+Learn More
+</button>
+
+</div>
+
+</div>
+</section>                                                                       <!-- HEALTH DASHBOARD -->
+
+<section id="dashboard">
+<div class="container">
+
+<h2 class="section-title">Health Dashboard</h2>
+<p class="section-subtitle">
+Track your vital health metrics daily
+</p>
+
+<div class="grid">
+
+<!-- HEART RATE -->
+
+<div class="card">
+<h3>❤️ Heart Rate Tracker</h3>
+
+<input
+type="number"
+id="heartRate"
+placeholder="Enter BPM"
+>
+
+<button onclick="saveHeartRate()">
+Save Reading
+</button>
+
+<div id="heartStatus" class="status"></div>
+</div>
+
+<!-- OXYGEN -->
+
+<div class="card">
+<h3>🫁 Oxygen Level Tracker</h3>
+
+<input
+type="number"
+id="oxygen"
+placeholder="Enter SpO₂ %"
+>
+
+<button onclick="saveOxygen()">
+Save Reading
+</button>
+
+<div id="oxygenStatus" class="status"></div>
+</div>
+
+<!-- STEPS -->
+
+<div class="card">
+<h3>🚶 Daily Steps Tracker</h3>
+
+<input
+type="number"
+id="steps"
+placeholder="Steps Today"
+>
+
+<button onclick="saveSteps()">
+Update Steps
+</button>
+
+<div class="progress">
+<div id="stepsBar" class="progress-bar"></div>
+</div>
+
+<p id="stepsText"></p>
+
+</div>
+
+<!-- WATER -->
+
+<div class="card">
+<h3>💧 Water Intake</h3>
+
+<input
+type="number"
+id="water"
+placeholder="Glasses of water"
+>
+
+<button onclick="saveWater()">
+Save Water Intake
+</button>
+
+<div class="progress">
+<div id="waterBar" class="progress-bar"></div>
+</div>
+
+<p id="waterText"></p>
+
+</div>
+
+<!-- SLEEP -->
+
+<div class="card">
+
+<h3>😴 Sleep Tracker</h3>
+
+<input
+type="number"
+step="0.1"
+id="sleep"
+placeholder="Hours slept"
+>
+
+<button onclick="saveSleep()">
+Save Sleep
+</button>
+
+<div id="sleepStatus" class="status"></div>
+
+</div>
+
+<!-- BMI -->
+
+<div class="card">
+
+<h3>⚖️ BMI Calculator</h3>
+
+<input
+type="number"
+id="weight"
+placeholder="Weight (kg)"
+>
+
+<input
+type="number"
+id="height"
+placeholder="Height (cm)"
+>
+
+<button onclick="calculateBMI()">
+Calculate BMI
+</button>
+
+<div id="bmiResult" class="status"></div>
+
+</div>
+
+<!-- MEDICATION -->
+
+<div class="card">
+
+<h3>💊 Medication Schedule</h3>
+
+<input
+type="text"
+id="medicineName"
+placeholder="Medicine Name"
+>
+
+<input
+type="time"
+id="medicineTime"
+>
+
+<button onclick="addMedicine()">
+Add Medicine
+</button>
+
+<ul id="medicineList"></ul>
+
+</div>
+
+<!-- APPOINTMENTS -->
+
+<div class="card">
+
+<h3>📅 Appointment Manager</h3>
+
+<input
+type="text"
+id="doctorName"
+placeholder="Doctor Name"
+>
+
+<input type="date" id="appointmentDate">
+<input type="time" id="appointmentTime">
+
+<button onclick="addAppointment()">
+Add Appointment
+</button>
+
+<ul id="appointmentList"></ul>
+
+</div>
+
+</div>
+</div>
+</section>                                               <!-- HEALTH TOOLS -->
+
+<section id="tools">
+
+<div class="container">
+
+<h2 class="section-title">
+Health Tools
+</h2>
+
+<p class="section-subtitle">
+Useful healthcare utilities
+</p>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>🩺 Symptom Checker</h3>
+
+<textarea
+id="symptoms"
+rows="5"
+placeholder="Describe symptoms..."
+></textarea>
+
+<button onclick="checkSymptoms()">
+Analyze Symptoms
+</button>
+
+<div id="symptomResult"></div>
+
+</div>
+
+<div class="card">
+
+<h3>🧮 Water Intake Calculator</h3>
+
+<input
+type="number"
+id="bodyWeight"
+placeholder="Weight (kg)"
+>
+
+<button onclick="calculateWater()">
+Calculate
+</button>
+
+<div id="waterCalcResult"></div>
+
+</div>
+
+<div class="card">
+
+<h3>🔥 Calorie Estimate</h3>
+
+<input
+type="number"
+id="age"
+placeholder="Age"
+>
+
+<input
+type="number"
+id="calWeight"
+placeholder="Weight kg"
+>
+
+<button onclick="calculateCalories()">
+Estimate Calories
+</button>
+
+<div id="calorieResult"></div>
+
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- FEATURES -->
+
+<section>
+
+<div class="container">
+
+<h2 class="section-title">
+Health Features
+</h2>
+
+<div class="grid">
+
+<div class="card"><div class="feature-icon">📚</div><h3>Disease Encyclopedia</h3></div>
+<div class="card"><div class="feature-icon">💊</div><h3>Medication Information</h3></div>
+<div class="card"><div class="feature-icon">💉</div><h3>Vaccination Tracker</h3></div>
+<div class="card"><div class="feature-icon">📄</div><h3>Health Reports</h3></div>
+<div class="card"><div class="feature-icon">🩹</div><h3>First Aid Guide</h3></div>
+<div class="card"><div class="feature-icon">🌿</div><h3>Wellness Resources</h3></div>
+<div class="card"><div class="feature-icon">🧠</div><h3>Mental Wellness</h3></div>
+<div class="card"><div class="feature-icon">🥗</div><h3>Nutrition Guidance</h3></div>
+<div class="card"><div class="feature-icon">🏋️</div><h3>Exercise Plans</h3></div>
+<div class="card"><div class="feature-icon">📰</div><h3>Health News</h3></div>
+
+</div>
+
+</div>
+</section>                                <!-- DOCTOR DIRECTORY -->
+
+<section id="doctors">
+
+<div class="container">
+
+<h2 class="section-title">
+Doctor Directory
+</h2>
+
+<p class="section-subtitle">
+Find healthcare specialists
+</p>
+
+<div class="grid">
+
+<div class="card directory-card">
+<h4>❤️ Cardiologist</h4>
+<p>Heart & cardiovascular care</p>
+</div>
+
+<div class="card directory-card">
+<h4>🩹 Dermatologist</h4>
+<p>Skin, hair & nail specialist</p>
+</div>
+
+<div class="card directory-card">
+<h4>👶 Pediatrician</h4>
+<p>Children's healthcare</p>
+</div>
+
+<div class="card directory-card">
+<h4>🩺 General Physician</h4>
+<p>Primary healthcare services</p>
+</div>
+
+<div class="card directory-card">
+<h4>🧠 Neurologist</h4>
+<p>Brain & nervous system specialist</p>
+</div>
+
+<div class="card directory-card">
+<h4>🦴 Orthopedic Specialist</h4>
+<p>Bones, joints & muscles</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- EMERGENCY CARE -->
+
+<section id="emergency">
+
+<div class="container">
+
+<h2 class="section-title">
+🚨 Emergency Care Information
+</h2>
+
+<p class="section-subtitle">
+Recognize urgent warning signs
+</p>
+
+<div class="grid">
+
+<div class="card emergency">
+<h3>❤️ Chest Pain</h3>
+<p>
+Sudden chest pain may indicate a heart emergency.
+Seek immediate medical attention.
+</p>
+</div>
+
+<div class="card emergency">
+<h3>🫁 Breathing Difficulty</h3>
+<p>
+Severe shortness of breath requires urgent care.
+Call emergency services immediately.
+</p>
+</div>
+
+<div class="card emergency">
+<h3>🧠 Stroke Symptoms</h3>
+<p>
+Face drooping, arm weakness, speech difficulty.
+Time is critical.
+</p>
+</div>
+
+<div class="card emergency">
+<h3>🩸 Severe Bleeding</h3>
+<p>
+Apply direct pressure and seek emergency help.
+</p>
+</div>
+
+<div class="card emergency">
+<h3>⚠️ Unconsciousness</h3>
+<p>
+Loss of consciousness is a medical emergency.
+Call emergency services.
+</p>
+</div>
+
+<div class="card emergency">
+<h3>🚑 Emergency Reminder</h3>
+<p>
+If symptoms are severe or life-threatening,
+contact local emergency services immediately.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+```html
+<script>
+(function () {
+
+  // Prevent duplicate initialization
+  if (
+    window.chatbase &&
+    window.chatbase("getState") === "initialized"
+  ) {
+    return;
+  }
+
+  // Create temporary queue function
+  window.chatbase = function (...args) {
+    (window.chatbase.q = window.chatbase.q || []).push(args);
+  };
+
+  // Proxy allows calling methods before script loads
+  window.chatbase = new Proxy(window.chatbase, {
+    get(target, prop) {
+      if (prop === "q") {
+        return target.q;
+      }
+      return (...args) => target(prop, ...args);
+    }
+  });
+
+  // Load Chatbase embed script
+  function loadChatbase() {
+    const script = document.createElement("script");
+
+    script.src = "https://www.chatbase.co/embed.min.js";
+    script.id = "jwalsx8uxIzwy1KDguB6S";
+    script.domain = "www.chatbase.co";
+    script.async = true;
+
+    document.body.appendChild(script);
+  }
+
+  // Load when page is ready
+  if (document.readyState === "complete") {
+    loadChatbase();
+  } else {
+    window.addEventListener("load", loadChatbase);
+  }
+
+})();
+</script>
+```
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div class="footer-col">
+
+<h3>HealthSphere</h3>
+
+<p>
+Your modern healthcare companion for wellness,
+tracking and preventive care.
+</p>
+
+</div>
+
+<div class="footer-col">
+
+<h3>Quick Links</h3>
+
+<a href="#dashboard">Dashboard</a>
+<a href="#tools">Health Tools</a>
+<a href="#doctors">Doctors</a>
+<a href="#hospitals">Hospitals</a>
+
+</div>
+
+<div class="footer-col">
+
+<h3>Resources</h3>
+
+<a href="#">Disease Encyclopedia</a>
+<a href="#">Medication Information</a>
+<a href="#">Wellness Guides</a>
+<a href="#">Health News</a>
+
+</div>
+
+<div class="footer-col">
+
+<h3>Contact</h3>
+
+<p>support@healthsphere.com</p>
+<p>+1 123 456 7890</p>
+<p>Available 24/7</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>
+© 2026 HealthSphere. All Rights Reserved.
+</p>
+
+<br>
+
+<p>
+⚠️ Disclaimer:
+HealthSphere provides educational information only.
+It does not replace professional medical advice,
+diagnosis, or treatment.
+Always consult qualified healthcare professionals
+for medical concerns.
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+<script>
+
+/* Load Saved Data */
+
+window.onload = () => {
+
+renderMedicines();
+renderAppointments();
+
+const heartRate =
+localStorage.getItem("heartRate");
+
+if(heartRate){
+document.getElementById("heartRate").value =
+heartRate;
+saveHeartRate();
+}
+
+const oxygen =
+localStorage.getItem("oxygen");
+
+if(oxygen){
+document.getElementById("oxygen").value =
+oxygen;
+saveOxygen();
+}
+
+const steps =
+localStorage.getItem("steps");
+
+if(steps){
+document.getElementById("steps").value =
+steps;
+saveSteps();
+}
+
+const water =
+localStorage.getItem("water");
+
+if(water){
+document.getElementById("water").value =
+water;
+saveWater();
+}
+
+const sleep =
+localStorage.getItem("sleep");
+
+if(sleep){
+document.getElementById("sleep").value =
+sleep;
+saveSleep();
+}
+
+};
+
+</script>
+
+</body>
+</html>                
